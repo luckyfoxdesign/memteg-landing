@@ -1,0 +1,23 @@
+.env
+.env.*
+!.env.example
+
+docs/
+
+# build
+dist/
+.astro/
+.output/
+
+# deps
+node_modules/
+
+# editor / os
+.DS_Store
+.idea/
+.vscode/
+*.log
+npm-debug.log*
+
+# claude
+.claude/settings.local.json

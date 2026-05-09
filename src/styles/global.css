@@ -1,0 +1,110 @@
+@import 'tailwindcss';
+
+@theme {
+  /* palette — light-first, warm cream + sage accent */
+  --color-bg: #f7f4ee;
+  --color-bg-2: #fbf9f3;
+  --color-surface: #fffefb;
+  --color-ink: #15120e;
+  --color-ink-2: #3a342a;
+  --color-muted: #6b6457;
+  --color-line: rgba(21, 18, 14, 0.08);
+  --color-line-strong: rgba(21, 18, 14, 0.16);
+
+  --color-accent: #6b7f5c;
+  --color-accent-ink: #ffffff;
+  --color-accent-soft: #d6dccd;
+
+  /* pop colors for bento + illustrations */
+  --color-butter: #f4d58d;
+  --color-peach: #f4b895;
+  --color-mint: #b8d4c0;
+  --color-clay: #d9a380;
+  --color-lilac: #d6cce3;
+
+  --color-tg: #26a5e4;
+
+  /* typography */
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* radius extensions (md/lg already exist in Tailwind, but we override scale) */
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* shadows */
+  --shadow-card: 0 1px 0 rgba(21, 18, 14, 0.04), 0 12px 32px -16px rgba(21, 18, 14, 0.12);
+  --shadow-float: 0 30px 80px -24px rgba(21, 18, 14, 0.18), 0 1px 0 rgba(21, 18, 14, 0.04);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* graph (Features.astro): once JS takes over, transform owns position — strip CSS left/top */
+[data-graph].is-interactive .graph-node {
+  left: 0 !important;
+  top: 0 !important;
+  /* JS will set transform; reset Tailwind translate utilities */
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  touch-action: none;
+  will-change: transform;
+}
+[data-graph].is-interactive {
+  cursor: default;
+}
+
+/* fade-in on intersection (used by data-reveal) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

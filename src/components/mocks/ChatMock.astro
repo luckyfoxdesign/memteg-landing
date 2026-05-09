@@ -1,0 +1,102 @@
+---
+import { t, type Locale } from '~/i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const dict = t(locale);
+const v = dict.mock.voice;
+---
+
+<div class="relative mx-auto w-full max-w-[420px]">
+  {/* main chat card */}
+  <div class="relative overflow-hidden rounded-[28px] border border-[var(--color-line)] bg-[var(--color-surface)] shadow-[var(--shadow-float)]">
+    {/* header */}
+    <div class="flex items-center gap-3 border-b border-[var(--color-line)] px-5 py-4">
+      <div class="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-tg)] text-white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 12l5 2 8-7-6 9 2 5 7-15-16 6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <div class="flex-1 leading-tight">
+        <div class="text-[14px] font-medium text-[var(--color-ink)]">memteg</div>
+        <div class="text-[11px] text-[var(--color-muted)]">bot · online</div>
+      </div>
+      <div class="text-[var(--color-muted)]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="6" r="1.5" fill="currentColor" />
+          <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+          <circle cx="12" cy="18" r="1.5" fill="currentColor" />
+        </svg>
+      </div>
+    </div>
+
+    {/* voice bubble (user) */}
+    <div class="flex justify-end px-5 pt-5">
+      <div class="flex max-w-[85%] items-center gap-3 rounded-2xl rounded-br-md bg-[var(--color-tg)] px-3.5 py-2.5 text-white">
+        <button class="flex h-8 w-8 items-center justify-center rounded-full bg-white/25" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="white"><path d="M3 2l7 4-7 4z"/></svg>
+        </button>
+        <div class="flex items-end gap-[2px]">
+          {[8, 14, 22, 18, 26, 14, 10, 18, 24, 16, 12, 20, 14, 8].map((h) => (
+            <span class="block w-[2px] rounded-sm bg-white/85" style={`height:${h}px`}></span>
+          ))}
+        </div>
+        <span class="ml-1 text-[11px] tabular-nums opacity-90">0:23</span>
+      </div>
+    </div>
+
+    {/* bot reply: transcript card */}
+    <div class="flex justify-start px-5 pt-3">
+      <div class="max-w-[88%] rounded-2xl rounded-bl-md bg-[var(--color-bg)] px-4 py-3.5">
+        <div class="mb-1.5 font-mono text-[10px] uppercase tracking-wider text-[var(--color-muted)]">{v.label}</div>
+        <p class="text-[13px] leading-relaxed text-[var(--color-ink-2)]">{v.transcript}</p>
+      </div>
+    </div>
+
+    {/* bot reply: tagged note card */}
+    <div class="flex justify-start px-5 pb-5 pt-3">
+      <div class="w-full max-w-[92%] rounded-2xl rounded-bl-md border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-3.5 shadow-sm">
+        <div class="mb-2 flex items-center gap-2">
+          <span class="inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"></span>
+          <span class="font-mono text-[11px] text-[var(--color-muted)]">{v.slug}</span>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          {v.tags.map((tag) => (
+            <span class="rounded-full bg-[var(--color-accent-soft)] px-2 py-0.5 font-mono text-[11px] text-[var(--color-ink-2)]">{tag}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* compose bar */}
+    <div class="flex items-center gap-3 border-t border-[var(--color-line)] bg-[var(--color-bg-2)] px-5 py-3">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="text-[var(--color-muted)]">
+        <path d="M21 12l-9 9a6 6 0 0 1-8.5-8.5l9-9a4 4 0 0 1 5.7 5.7l-9 9a2 2 0 0 1-2.8-2.8l8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="flex-1 text-[13px] text-[var(--color-muted)]">Message</div>
+      <div class="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-tg)] text-white">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </div>
+
+  {/* floating chip: search hit */}
+  <div class="absolute -left-6 top-1/3 hidden -rotate-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-3 shadow-[var(--shadow-card)] sm:block">
+    <div class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-muted)]">search</div>
+    <div class="mt-1 text-[12px] text-[var(--color-ink)]">{dict.mock.search.q}</div>
+  </div>
+
+  {/* floating chip: linked note */}
+  <div class="absolute -right-4 top-12 hidden rotate-2 rounded-2xl bg-[var(--color-butter)] px-4 py-3 shadow-[var(--shadow-card)] sm:block">
+    <div class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-ink-2)]/70">linked</div>
+    <div class="mt-1 text-[12px] font-medium text-[var(--color-ink)]">{dict.mock.search.result}</div>
+  </div>
+
+  {/* floating chip: ask hit */}
+  <div class="absolute -bottom-6 -right-6 hidden -rotate-2 rounded-2xl bg-[var(--color-mint)] px-4 py-3 shadow-[var(--shadow-card)] sm:block max-w-[200px]">
+    <div class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-ink-2)]/70">/ask</div>
+    <div class="mt-1 text-[12px] leading-snug text-[var(--color-ink)]">{dict.mock.ask.q}</div>
+  </div>
+</div>

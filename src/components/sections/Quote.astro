@@ -1,0 +1,17 @@
+---
+import { t, type Locale } from '~/i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const dict = t(locale);
+---
+
+<section class="border-y border-[var(--color-line)] bg-[var(--color-bg-2)]">
+  <div class="mx-auto w-full max-w-[1200px] px-5 py-16 md:px-10 md:py-24" data-reveal>
+    <p class="text-[clamp(28px,4vw,52px)] font-medium leading-[1.05] tracking-[-0.025em] text-[var(--color-ink)]">
+      {dict.quote.text}
+    </p>
+    <p class="mt-4 font-mono text-[12px] uppercase tracking-wider text-[var(--color-muted)]">
+      — {dict.quote.author}
+    </p>
+  </div>
+</section>

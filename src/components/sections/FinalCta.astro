@@ -1,0 +1,43 @@
+---
+import { t, type Locale } from '~/i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const dict = t(locale);
+const botUrl = import.meta.env.PUBLIC_BOT_URL || 'https://t.me/';
+---
+
+<section class="relative">
+  <div class="mx-auto w-full max-w-[1200px] px-5 pb-24 md:px-10 md:pb-32">
+    <div
+      class="relative overflow-hidden rounded-[32px] border border-[var(--color-line)] bg-[var(--color-surface)] px-6 py-20 text-center md:px-12 md:py-28"
+      data-reveal
+    >
+      <div
+        class="pointer-events-none absolute inset-0 opacity-80 blur-3xl"
+        style="background: radial-gradient(40% 60% at 25% 30%, var(--color-peach) 0%, transparent 70%), radial-gradient(40% 60% at 80% 70%, var(--color-mint) 0%, transparent 70%), radial-gradient(40% 60% at 50% 100%, var(--color-butter) 0%, transparent 65%);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="relative">
+        <h2 class="mx-auto max-w-3xl text-[clamp(36px,5.5vw,72px)] font-medium leading-[1.02] tracking-[-0.035em]">
+          {dict.finalCta.title}
+        </h2>
+        <p class="mx-auto mt-5 max-w-xl text-[16px] leading-relaxed text-[var(--color-ink-2)]">
+          {dict.finalCta.body}
+        </p>
+
+        <a
+          href={botUrl}
+          target="_blank"
+          rel="noopener"
+          class="group mt-9 inline-flex items-center gap-2 rounded-full bg-[var(--color-ink)] px-7 py-4 text-[15px] font-medium text-[var(--color-bg)] transition-all hover:-translate-y-px hover:bg-[var(--color-accent)]"
+        >
+          {dict.finalCta.cta}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="transition-transform group-hover:translate-x-0.5" aria-hidden="true">
+            <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

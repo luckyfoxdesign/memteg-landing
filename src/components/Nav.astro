@@ -1,0 +1,44 @@
+---
+import Logo from './Logo.astro';
+import LangSwitch from './LangSwitch.astro';
+import { t, localizedPath, type Locale } from '~/i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const dict = t(locale);
+const botUrl = import.meta.env.PUBLIC_BOT_URL || 'https://t.me/';
+const home = localizedPath(locale);
+---
+
+<header class="sticky top-0 z-40">
+  <div class="absolute inset-0 bg-[var(--color-bg)]/70 backdrop-blur-xl border-b border-[var(--color-line)]"></div>
+  <nav class="relative mx-auto flex w-full max-w-[1200px] items-center justify-between px-5 py-4 md:px-10 md:py-5">
+    <a href={home} class="text-[var(--color-ink)]">
+      <Logo />
+    </a>
+
+    <div class="hidden items-center gap-8 text-[14px] text-[var(--color-muted)] md:flex">
+      <a href={`${home}#features`} class="hover:text-[var(--color-ink)] transition-colors">{dict.nav.features}</a>
+      <a href={`${home}#how`} class="hover:text-[var(--color-ink)] transition-colors">{dict.nav.how}</a>
+      <a href={`${home}#privacy`} class="hover:text-[var(--color-ink)] transition-colors">{dict.nav.privacy}</a>
+      <a href={localizedPath(locale, 'contact')} class="hover:text-[var(--color-ink)] transition-colors">{dict.nav.contact}</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <LangSwitch current={locale} />
+      <a
+        href={botUrl}
+        target="_blank"
+        rel="noopener"
+        class="hidden md:inline-flex items-center gap-1.5 rounded-full bg-[var(--color-ink)] px-4 py-2.5 text-[13px] font-medium text-[var(--color-bg)] transition-all hover:bg-[var(--color-accent)] hover:-translate-y-px"
+      >
+        {dict.nav.cta}
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </nav>
+</header>

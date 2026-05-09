@@ -1,0 +1,30 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Hero from '~/components/sections/Hero.astro';
+import Quote from '~/components/sections/Quote.astro';
+import HowItWorks from '~/components/sections/HowItWorks.astro';
+import Features from '~/components/sections/Features.astro';
+import WhoFor from '~/components/sections/WhoFor.astro';
+import PrivacyBlock from '~/components/sections/PrivacyBlock.astro';
+import Faq from '~/components/sections/Faq.astro';
+import FinalCta from '~/components/sections/FinalCta.astro';
+import { locales, t, type Locale } from '~/i18n';
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const dict = t(lang);
+---
+
+<BaseLayout locale={lang} title={dict.meta.home.title} description={dict.meta.home.description}>
+  <Hero locale={lang} />
+  <Quote locale={lang} />
+  <HowItWorks locale={lang} />
+  <Features locale={lang} />
+  <WhoFor locale={lang} />
+  <PrivacyBlock locale={lang} />
+  <Faq locale={lang} />
+  <FinalCta locale={lang} />
+</BaseLayout>

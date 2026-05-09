@@ -1,0 +1,74 @@
+---
+import { t, type Locale } from '~/i18n';
+import ChatMock from '~/components/mocks/ChatMock.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const dict = t(locale);
+const botUrl = import.meta.env.PUBLIC_BOT_URL || 'https://t.me/';
+---
+
+<section class="relative overflow-hidden">
+  {/* gradient blob */}
+  <div
+    class="pointer-events-none absolute -top-32 right-[-15%] z-0 h-[700px] w-[80%] opacity-70 blur-[80px]"
+    style="background: radial-gradient(60% 60% at 30% 30%, var(--color-peach) 0%, transparent 60%), radial-gradient(70% 70% at 80% 60%, var(--color-butter) 0%, transparent 65%), radial-gradient(60% 60% at 60% 90%, var(--color-mint) 0%, transparent 65%);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 mx-auto w-full max-w-[1200px] px-5 pt-16 pb-24 md:px-10 md:pt-24 md:pb-32 lg:pt-32">
+    <div class="grid items-center gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
+      <div data-reveal>
+        <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)]/70 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-[var(--color-muted)] backdrop-blur-md">
+          <span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"></span>
+          {dict.hero.eyebrow}
+        </div>
+
+        <h1 class="text-[clamp(40px,7.5vw,96px)] font-medium leading-[0.98] tracking-[-0.035em] text-[var(--color-ink)]">
+          {dict.hero.title}
+        </h1>
+
+        <p class="mt-6 max-w-xl text-[clamp(16px,1.6vw,19px)] leading-relaxed text-[var(--color-ink-2)]">
+          {dict.hero.subtitle}
+        </p>
+
+        <div class="mt-9 flex flex-wrap items-center gap-3">
+          <a
+            href={botUrl}
+            target="_blank"
+            rel="noopener"
+            class="group inline-flex items-center gap-2 rounded-full bg-[var(--color-ink)] px-6 py-3.5 text-[15px] font-medium text-[var(--color-bg)] transition-all hover:-translate-y-px hover:bg-[var(--color-accent)]"
+          >
+            {dict.hero.ctaPrimary}
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="transition-transform group-hover:translate-x-0.5" aria-hidden="true">
+              <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+          <a
+            href="#how"
+            class="inline-flex items-center gap-2 rounded-full border border-[var(--color-line-strong)] px-6 py-3.5 text-[15px] font-medium text-[var(--color-ink)] transition-colors hover:bg-[var(--color-surface)]"
+          >
+            {dict.hero.ctaSecondary}
+          </a>
+        </div>
+
+        <ul class="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-[var(--color-muted)]">
+          {
+            dict.hero.badges.map((b, i) => (
+              <li class="flex items-center gap-2">
+                {i > 0 && <span class="h-1 w-1 rounded-full bg-[var(--color-line-strong)]" aria-hidden="true"></span>}
+                <span>{b}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="relative" data-reveal>
+        <ChatMock locale={locale} />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,184 @@
+---
+import { t, type Locale } from '~/i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const dict = t(locale);
+const f = dict.features.items;
+const m = dict.mock;
+
+const waveBars = [10, 16, 22, 28, 36, 24, 18, 32, 40, 28, 22, 16, 24, 32, 38, 30, 22, 14, 20, 26, 18, 12, 8, 14];
+
+const graphNodes = [
+  { x: 18, y: 28, label: m.graph[0], active: false },
+  { x: 50, y: 55, label: m.graph[1], active: true },
+  { x: 84, y: 22, label: m.graph[2], active: false },
+  { x: 24, y: 86, label: m.graph[3], active: false },
+  { x: 80, y: 80, label: m.graph[4], active: false },
+];
+const graphEdges: [number, number, boolean][] = [
+  [0, 1, false],
+  [1, 2, true],
+  [1, 3, false],
+  [1, 4, false],
+];
+---
+
+<section id="features" class="relative">
+  <div class="mx-auto w-full max-w-[1200px] px-5 py-24 md:px-10 md:py-32">
+    <div class="max-w-2xl" data-reveal>
+      <div class="mb-4 font-mono text-[12px] uppercase tracking-wider text-[var(--color-muted)]">
+        {dict.features.eyebrow}
+      </div>
+      <h2 class="text-[clamp(32px,4.5vw,56px)] font-medium leading-[1.02] tracking-[-0.03em]">
+        {dict.features.title}
+      </h2>
+    </div>
+
+    <div class="mt-14 grid gap-4 md:grid-cols-6 md:gap-5 md:auto-rows-[minmax(220px,auto)]">
+
+      {/* voice — large, span 4 */}
+      <article class="md:col-span-4 md:row-span-2 relative overflow-hidden rounded-[28px] border border-[var(--color-line)] bg-[var(--color-surface)] p-7 md:p-9" data-reveal>
+        <div class="absolute -right-10 -top-10 h-56 w-56 rounded-full bg-[var(--color-peach)] opacity-50 blur-3xl"></div>
+        <div class="relative">
+          <h3 class="text-[24px] font-medium leading-tight tracking-[-0.02em] md:text-[28px]">{f.voice.title}</h3>
+          <p class="mt-3 max-w-md text-[14px] leading-relaxed text-[var(--color-muted)] md:text-[15px]">{f.voice.body}</p>
+
+          <div class="mt-8 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg)] p-5">
+            <div class="mb-3 flex items-center gap-3">
+              <div class="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-tg)] text-white">
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="white" aria-hidden="true"><path d="M3 2l7 4-7 4z"/></svg>
+              </div>
+              <div class="flex flex-1 items-end gap-[2px]">
+                {waveBars.map((h) => (
+                  <span class="block flex-1 rounded-sm bg-[var(--color-tg)]/70" style={`height:${h}px`}></span>
+                ))}
+              </div>
+              <span class="font-mono text-[11px] tabular-nums text-[var(--color-muted)]">0:23</span>
+            </div>
+            <div class="mt-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[var(--color-muted)]">
+              <span class="inline-block h-1 w-1 animate-pulse rounded-full bg-[var(--color-accent)]"></span>
+              transcribing…
+            </div>
+            <div class="mt-2 text-[13px] leading-relaxed text-[var(--color-ink-2)]">{m.voice.transcript}</div>
+          </div>
+        </div>
+      </article>
+
+      {/* tags — 2 cols */}
+      <article class="md:col-span-2 relative overflow-hidden rounded-[28px] border border-[var(--color-line)] bg-[var(--color-butter)] p-7" data-reveal>
+        <h3 class="text-[20px] font-medium leading-tight tracking-[-0.015em] md:text-[22px]">{f.tags.title}</h3>
+        <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-ink-2)]/80">{f.tags.body}</p>
+        <div class="mt-6 space-y-2">
+          <div class="font-mono text-[11px] text-[var(--color-ink-2)]/60">{m.voice.slug}</div>
+          <div class="flex flex-wrap gap-1.5">
+            {m.voice.tags.map((tag) => (
+              <span class="rounded-full bg-[var(--color-ink)]/8 px-2.5 py-1 font-mono text-[11px] text-[var(--color-ink)]" style="background: rgba(21,18,14,0.08)">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </article>
+
+      {/* search — 2 cols */}
+      <article class="md:col-span-2 relative overflow-hidden rounded-[28px] border border-[var(--color-line)] bg-[var(--color-surface)] p-7" data-reveal>
+        <h3 class="text-[20px] font-medium leading-tight tracking-[-0.015em] md:text-[22px]">{f.search.title}</h3>
+        <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{f.search.body}</p>
+        <div class="mt-5 rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-3 font-mono text-[12px]">
+          <div class="flex items-center gap-2 text-[var(--color-muted)]">
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 9.5l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span class="truncate">{m.search.q}</span>
+          </div>
+        </div>
+        <div class="mt-2 flex items-center gap-2 px-1 text-[11px] text-[var(--color-muted)]">
+          <span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"></span>
+          {m.search.result}
+        </div>
+      </article>
+
+      {/* graph — 3 cols */}
+      <article class="md:col-span-3 relative overflow-hidden rounded-[28px] border border-[var(--color-line)] bg-[var(--color-mint)] p-7" data-reveal>
+        <h3 class="text-[20px] font-medium leading-tight tracking-[-0.015em] md:text-[22px]">{f.graph.title}</h3>
+        <p class="mt-2 max-w-sm text-[13px] leading-relaxed text-[var(--color-ink-2)]/80">{f.graph.body}</p>
+
+        <div class="graph relative mt-6 h-48 w-full select-none md:h-52" data-graph>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="graph-svg absolute inset-0 h-full w-full overflow-visible" aria-hidden="true">
+            {
+              graphEdges.map(([a, b, active]) => (
+                <line
+                  data-graph-edge
+                  data-from={a}
+                  data-to={b}
+                  x1={graphNodes[a].x}
+                  y1={graphNodes[a].y}
+                  x2={graphNodes[b].x}
+                  y2={graphNodes[b].y}
+                  stroke="var(--color-ink)"
+                  stroke-width={active ? 1.5 : 1}
+                  opacity={active ? 0.7 : 0.22}
+                  vector-effect="non-scaling-stroke"
+                />
+              ))
+            }
+          </svg>
+          {
+            graphNodes.map((n, i) => (
+              <span
+                data-graph-node
+                data-graph-i={i}
+                data-graph-x={n.x}
+                data-graph-y={n.y}
+                class:list={[
+                  'graph-node absolute -translate-x-1/2 -translate-y-1/2 cursor-grab whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[10.5px] leading-none active:cursor-grabbing',
+                  n.active
+                    ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--color-bg)]'
+                    : 'border-[var(--color-ink)]/15 bg-[var(--color-surface)]/85 text-[var(--color-ink-2)] backdrop-blur-sm',
+                ]}
+                style={`left:${n.x}%; top:${n.y}%`}
+              >
+                {n.label}
+              </span>
+            ))
+          }
+        </div>
+      </article>
+
+      {/* ask — 3 cols */}
+      <article class="md:col-span-3 relative overflow-hidden rounded-[28px] border border-[var(--color-line)] bg-[var(--color-surface)] p-7" data-reveal>
+        <h3 class="text-[20px] font-medium leading-tight tracking-[-0.015em] md:text-[22px]">{f.ask.title}</h3>
+        <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{f.ask.body}</p>
+        <div class="mt-5 space-y-2">
+          <div class="rounded-2xl rounded-br-md bg-[var(--color-tg)] px-3.5 py-2 text-[12px] text-white max-w-[85%] ml-auto">
+            <span class="font-mono opacity-80 mr-1">/ask</span>{m.ask.q}
+          </div>
+          <div class="rounded-2xl rounded-bl-md bg-[var(--color-bg)] px-3.5 py-2.5 text-[12px] leading-relaxed text-[var(--color-ink-2)] max-w-[92%]">
+            {m.ask.a}
+            <div class="mt-2 font-mono text-[10px] text-[var(--color-muted)]">↳ {m.ask.cite}</div>
+          </div>
+        </div>
+      </article>
+
+      {/* erase — 6 cols, short */}
+      <article class="md:col-span-6 relative overflow-hidden rounded-[28px] border border-[var(--color-line)] bg-[var(--color-ink)] p-7 md:p-8 text-[var(--color-bg)]" data-reveal>
+        <div class="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-center">
+          <div>
+            <h3 class="text-[24px] font-medium leading-tight tracking-[-0.02em] md:text-[28px]">{f.erase.title}</h3>
+            <p class="mt-3 max-w-xl text-[14px] leading-relaxed text-[var(--color-bg)]/70 md:text-[15px]">{f.erase.body}</p>
+          </div>
+          <div class="rounded-2xl bg-white/5 p-4 font-mono text-[12px] text-[var(--color-bg)]/90 backdrop-blur">
+            <div class="flex items-center gap-2 text-[var(--color-bg)]/50">
+              <span class="inline-block h-2 w-2 rounded-full bg-[var(--color-bg)]/30"></span>
+              <span class="inline-block h-2 w-2 rounded-full bg-[var(--color-bg)]/30"></span>
+              <span class="inline-block h-2 w-2 rounded-full bg-[var(--color-bg)]/30"></span>
+            </div>
+            <div class="mt-3"><span class="text-[var(--color-bg)]/50">$</span> /delete_me</div>
+            <div class="mt-1 text-[var(--color-bg)]/60">→ wiped 247 notes, 0 left</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import '~/scripts/graph';
+</script>

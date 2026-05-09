@@ -1,0 +1,43 @@
+---
+import { t, localizedPath, type Locale } from '~/i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const dict = t(locale);
+---
+
+<section id="privacy" class="relative">
+  <div class="mx-auto w-full max-w-[1200px] px-5 md:px-10">
+    <div class="overflow-hidden rounded-[32px] bg-[var(--color-ink)] px-6 py-16 text-[var(--color-bg)] md:px-14 md:py-24" data-reveal>
+      <div class="grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16">
+        <div>
+          <div class="mb-4 font-mono text-[12px] uppercase tracking-wider text-[var(--color-bg)]/50">
+            {dict.privacy.eyebrow}
+          </div>
+          <h2 class="text-[clamp(32px,4.5vw,52px)] font-medium leading-[1.02] tracking-[-0.03em]">
+            {dict.privacy.title}
+          </h2>
+          <a
+            href={localizedPath(locale, 'privacy')}
+            class="mt-8 inline-flex items-center gap-2 rounded-full border border-[var(--color-bg)]/20 px-5 py-3 text-[14px] text-[var(--color-bg)] transition-colors hover:bg-[var(--color-bg)]/10"
+          >
+            {dict.privacy.cta}
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {
+            dict.privacy.items.map((item) => (
+              <li class="rounded-2xl border border-[var(--color-bg)]/10 bg-white/5 p-5 backdrop-blur">
+                <h3 class="text-[15px] font-medium text-[var(--color-bg)]">{item.title}</h3>
+                <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-bg)]/65">{item.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

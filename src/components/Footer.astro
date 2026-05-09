@@ -1,0 +1,43 @@
+---
+import Logo from './Logo.astro';
+import { t, localizedPath, type Locale } from '~/i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const dict = t(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-32 border-t border-[var(--color-line)] bg-[var(--color-bg-2)]">
+  <div class="mx-auto grid w-full max-w-[1200px] gap-12 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-10 md:py-20">
+    <div class="space-y-4">
+      <Logo />
+      <p class="max-w-xs text-[14px] leading-relaxed text-[var(--color-muted)]">{dict.footer.tagline}</p>
+    </div>
+
+    <div>
+      <h3 class="mb-4 text-[12px] font-mono uppercase tracking-wider text-[var(--color-muted)]">{dict.footer.nav.product}</h3>
+      <ul class="space-y-3 text-[14px]">
+        <li><a class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]" href={localizedPath(locale)}>{dict.footer.nav.home}</a></li>
+        <li><a class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]" href={localizedPath(locale, 'contact')}>{dict.footer.nav.contact}</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="mb-4 text-[12px] font-mono uppercase tracking-wider text-[var(--color-muted)]">{dict.footer.nav.legal}</h3>
+      <ul class="space-y-3 text-[14px]">
+        <li><a class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]" href={localizedPath(locale, 'privacy')}>{dict.footer.nav.privacy}</a></li>
+        <li><a class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]" href={localizedPath(locale, 'terms')}>{dict.footer.nav.terms}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-[var(--color-line)]">
+    <div class="mx-auto flex w-full max-w-[1200px] items-center justify-between px-5 py-5 text-[12px] text-[var(--color-muted)] md:px-10">
+      <span>© {year} memteg.</span>
+      <span>{dict.footer.rights}</span>
+    </div>
+  </div>
+</footer>

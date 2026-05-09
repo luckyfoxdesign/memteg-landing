@@ -1,0 +1,35 @@
+---
+// Static root: detect language client-side. Defaults to English.
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>memteg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0;url=/en" />
+    <link rel="canonical" href="/en" />
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('memteg.locale');
+          var supported = ['en', 'ru'];
+          var lang = saved && supported.indexOf(saved) > -1 ? saved : null;
+          if (!lang) {
+            var nav = (navigator.language || 'en').toLowerCase();
+            lang = nav.indexOf('ru') === 0 ? 'ru' : 'en';
+          }
+          window.location.replace('/' + lang);
+        } catch (e) {
+          window.location.replace('/en');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <p style="font-family: system-ui; padding: 2rem;">
+      Redirecting to <a href="/en">/en</a>…
+    </p>
+  </body>
+</html>
