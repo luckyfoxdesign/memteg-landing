@@ -27,7 +27,7 @@
 | `/{en,ru}` | `src/pages/[lang]/index.astro` | Главная: hero, quote, how-it-works, bento features, who-for, privacy block, FAQ, final CTA |
 | `/{en,ru}/privacy` | `src/pages/[lang]/privacy.astro` | Политика конфиденциальности |
 | `/{en,ru}/terms`   | `src/pages/[lang]/terms.astro` | Пользовательское соглашение |
-| `/{en,ru}/contact` | `src/pages/[lang]/contact.astro` | Контактная страница (Email + Telegram) |
+| `/{en,ru}/contact` | `src/pages/[lang]/contact.astro` | Контактная страница с Telegram CTA |
 
 ## Модули
 
@@ -64,8 +64,8 @@
 
 `.env` (локально) и `.env.example` (в репо) — переменные:
 - `PUBLIC_BOT_URL` — ссылка на чат с ботом (на старте `https://t.me/`, заменить когда появится username)
+- `PUBLIC_CONTACT_BOT_URL` — ссылка на чат с ботом для страницы Contact (может отличаться от invite deep link)
 - `PUBLIC_SITE_URL` — каноничный URL сайта (используется в `<canonical>`, OG, sitemap)
-- `PUBLIC_CONTACT_EMAIL` — email на странице Contact
 
 ## Если нужно сделать X
 

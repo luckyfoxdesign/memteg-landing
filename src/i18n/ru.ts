@@ -230,7 +230,7 @@ export const ru: Dict = {
       },
       {
         h: 'Контакт',
-        body: 'По вопросам данных — на адрес со страницы «Контакты».',
+        body: 'По вопросам данных — напиши боту со страницы «Контакты».',
       },
     ],
   },
@@ -267,10 +267,12 @@ export const ru: Dict = {
   },
   contactPage: {
     h1: 'Контакты',
-    intro: 'memteg делает и поддерживает небольшая команда. Самый быстрый канал — Telegram.',
-    options: [
-      { label: 'Email', value: 'PUBLIC_CONTACT_EMAIL', kind: 'email' },
-      { label: 'Telegram', value: 'PUBLIC_BOT_URL', kind: 'tg' },
-    ],
+    intro: 'memteg делает и поддерживает небольшая команда. Самый быстрый канал — сам бот.',
+    cta: {
+      label: 'Telegram',
+      title: 'Написать memteg в Telegram',
+      body: 'Инвайты, вопросы, баги, фидбек и запросы по данным идут через один чат.',
+      action: 'Открыть бота',
+    },
   },
 };

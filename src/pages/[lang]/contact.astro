@@ -9,44 +9,35 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Locale;
 const dict = t(lang);
 const page = dict.contactPage;
-const env = {
-  PUBLIC_BOT_URL: import.meta.env.PUBLIC_BOT_URL || 'https://t.me/',
-  PUBLIC_CONTACT_EMAIL: import.meta.env.PUBLIC_CONTACT_EMAIL || 'hello@memteg.app',
-};
-
-const options = page.options.map((o) => {
-  const value = (env as Record<string, string>)[o.value] ?? o.value;
-  const href = o.kind === 'email' ? `mailto:${value}` : value;
-  return { ...o, value, href };
-});
+const inviteBotUrl = import.meta.env.PUBLIC_BOT_URL || 'https://t.me/';
+const defaultContactBotUrl = inviteBotUrl.split(/[?#]/)[0];
+const botUrl = import.meta.env.PUBLIC_CONTACT_BOT_URL || defaultContactBotUrl;
 ---
 
 <BaseLayout locale={lang} title={dict.meta.contact.title} description={dict.meta.contact.description}>
-  <article class="mx-auto w-full max-w-[800px] px-5 pb-24 pt-20 md:px-10 md:pb-32 md:pt-28">
+  <article class="mx-auto w-full max-w-[760px] px-5 pb-24 pt-20 md:px-10 md:pb-32 md:pt-28">
     <h1 class="text-[clamp(36px,5vw,64px)] font-medium leading-[1.02] tracking-[-0.03em]">{page.h1}</h1>
     <p class="mt-5 max-w-2xl text-[16px] leading-relaxed text-[var(--color-ink-2)]">{page.intro}</p>
 
-    <ul class="mt-12 grid gap-4 sm:grid-cols-2">
-      {
-        options.map((o) => (
-          <li>
-            <a
-              href={o.href}
-              target={o.kind === 'tg' ? '_blank' : undefined}
-              rel={o.kind === 'tg' ? 'noopener' : undefined}
-              class="group flex items-center justify-between gap-4 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] px-5 py-5 transition-all hover:-translate-y-px hover:border-[var(--color-line-strong)]"
-            >
-              <div>
-                <div class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-muted)]">{o.label}</div>
-                <div class="mt-1 text-[15px] font-medium text-[var(--color-ink)]">{o.value}</div>
-              </div>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="text-[var(--color-muted)] transition-transform group-hover:translate-x-0.5" aria-hidden="true">
-                <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <section class="mt-12 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-5 shadow-[0_1px_0_rgba(20,20,18,0.03)] sm:p-6">
+      <div class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-muted)]">{page.cta.label}</div>
+      <div class="mt-4 grid gap-6 sm:grid-cols-[1fr_auto] sm:items-end">
+        <div>
+          <h2 class="text-[24px] font-medium leading-tight text-[var(--color-ink)] sm:text-[28px]">{page.cta.title}</h2>
+          <p class="mt-3 max-w-xl text-[15px] leading-relaxed text-[var(--color-ink-2)]">{page.cta.body}</p>
+        </div>
+        <a
+          href={botUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-ink)] px-5 text-[14px] font-medium text-[var(--color-bg)] transition-all hover:-translate-y-px hover:bg-[var(--color-ink-2)]"
+        >
+          {page.cta.action}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </section>
   </article>
 </BaseLayout>

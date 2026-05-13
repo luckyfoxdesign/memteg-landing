@@ -229,7 +229,7 @@ export const en = {
       },
       {
         h: 'Contact',
-        body: 'For data requests, write to the address on the Contact page.',
+        body: 'For data requests, write to the bot from the Contact page.',
       },
     ],
   },
@@ -267,11 +267,13 @@ export const en = {
   },
   contactPage: {
     h1: 'Contact',
-    intro: 'memteg is built and operated by a small team. The fastest channel is Telegram.',
-    options: [
-      { label: 'Email', value: 'PUBLIC_CONTACT_EMAIL', kind: 'email' },
-      { label: 'Telegram', value: 'PUBLIC_BOT_URL', kind: 'tg' },
-    ],
+    intro: 'memteg is built and operated by a small team. The fastest channel is the bot itself.',
+    cta: {
+      label: 'Telegram',
+      title: 'Write to memteg in Telegram',
+      body: 'Invites, questions, bug reports, feedback and data requests go through the same chat.',
+      action: 'Open bot',
+    },
   },
 };
 
