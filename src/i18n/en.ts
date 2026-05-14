@@ -23,16 +23,16 @@ export const en = {
     how: 'How it works',
     privacy: 'Privacy',
     contact: 'Contact',
-    cta: 'Request invite',
+    cta: 'Join the beta',
   },
   hero: {
     eyebrow: 'A Telegram bot for thinking people',
     title: 'Your thoughts, finally captured.',
     subtitle:
-      'Forward, type or speak — memteg structures your notes, links them, and lets you search what you actually meant.',
-    ctaPrimary: 'Request invite',
+      'An idea hits — you catch it. A link surfaces — you save it. No laptop, no "I\'ll write it later", no switching.',
+    ctaPrimary: 'Join the beta',
     ctaSecondary: 'How it works',
-    badges: ['Free during beta', 'Wipe everything with /delete_me', 'Lives inside Telegram'],
+    badges: ['Free during beta', 'Your data deleted on deactivation', 'Lives inside Telegram'],
   },
   quote: {
     text: '"Saved Messages" is where ideas go to die.',
@@ -84,8 +84,8 @@ export const en = {
         body: 'Ask questions about everything you\'ve saved. Get an answer with citations to the original notes.',
       },
       erase: {
-        title: '/delete_me — and it\'s gone',
-        body: 'One command erases everything we know about you. No support tickets, no confirmation chains.',
+        title: 'Deactivate and it\'s gone',
+        body: 'Deactivate your account — everything we know about you is gone. No support tickets.',
       },
     },
   },
@@ -124,8 +124,8 @@ export const en = {
         body: 'We store a file_id, not the file. Delete the message in Telegram — the audio is gone.',
       },
       {
-        title: '/delete_me wipes everything',
-        body: 'No exit interview. Run the command and your data is removed.',
+        title: 'Deactivation wipes everything',
+        body: 'No exit interview. Deactivate your account — your data is removed.',
       },
     ],
     cta: 'Read the full policy',
@@ -151,15 +151,19 @@ export const en = {
         a: 'Markdown export is on the roadmap. A direct Obsidian-via-git sync is planned for power users.',
       },
       {
+        q: 'How is this different from Notion?',
+        a: 'Notion is for when you have time. Memteg is for when you don\'t.',
+      },
+      {
         q: 'What happens to voice notes?',
         a: 'They\'re transcribed once and never stored on our side. The audio stays in your Telegram chat.',
       },
     ],
   },
   finalCta: {
-    title: 'Stop losing your good ideas.',
-    body: 'memteg is in private beta. Tap below and we\'ll send you an invite.',
-    cta: 'Request invite',
+    title: 'How many good ideas have you already lost?',
+    body: 'The next one — you won\'t. memteg is in private beta.',
+    cta: 'Join the beta',
   },
   footer: {
     tagline: 'A Telegram bot for thinking people.',
@@ -180,21 +184,21 @@ export const en = {
     voice: {
       label: 'Voice note · 0:23',
       transcript:
-        'Idea: the onboarding drops people right after the first empty state. We should preload one example note so the bot feels alive from message one.',
-      tags: ['#product', '#onboarding', '#ideas'],
-      slug: 'onboarding-empty-state-fix',
+        'Realized I keep having the same internal debate about that side project. Maybe the issue isn\'t time — I\'ve just never written down what "done" actually looks like.',
+      tags: ['#clarity', '#projects', '#thinking'],
+      slug: 'defining-done',
     },
     ask: {
-      q: 'what did I think about that book on attention last month?',
-      a: 'You wrote that "shallow attention" is the cost of always having Telegram open — and that the fix is structural, not willpower-based.',
-      cite: 'note · stolen-focus-takeaways',
+      q: 'what did I write about staying focused?',
+      a: 'You noted that deep focus isn\'t about discipline — it\'s about removing the option to get distracted.',
+      cite: 'note · focus-by-subtraction',
     },
     search: {
-      q: 'idea about focus blocks',
-      result: 'deep-work session log',
-      hint: 'matched semantically — your note doesn\'t contain the word "focus".',
+      q: 'why I feel drained after meetings',
+      result: 'decisions cost more than doing',
+      hint: 'matched semantically — your note doesn\'t mention "meetings".',
     },
-    graph: ['onboarding', 'first-run feel', 'empty states', 'product polish', 'shallow attention'],
+    graph: ['focus', 'decisions', 'energy', 'deep work', 'meetings'],
   },
 
   privacyPage: {
@@ -221,7 +225,7 @@ export const en = {
       },
       {
         h: 'Right to deletion',
-        body: 'Run /delete_me inside the bot. All your notes, embeddings and metadata are removed from our database immediately.',
+        body: 'Deactivate your account through the bot. All your notes, embeddings and metadata are removed from our database immediately.',
       },
       {
         h: 'Encryption',
