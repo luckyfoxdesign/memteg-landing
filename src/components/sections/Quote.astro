@@ -11,7 +11,21 @@ const dict = t(locale);
       {dict.quote.text}
     </p>
     <p class="mt-4 font-mono text-[12px] uppercase tracking-wider text-[var(--color-muted)]">
-      — {dict.quote.author}
+      — <span id="quote-author" style="transition: opacity 0.4s ease">{dict.quote.authors[0]}</span>
     </p>
   </div>
 </section>
+
+<script define:vars={{ authors: dict.quote.authors }}>
+  const el = document.getElementById('quote-author');
+  let i = 0;
+
+  setInterval(() => {
+    el.style.opacity = '0';
+    setTimeout(() => {
+      i = (i + 1) % authors.length;
+      el.textContent = authors[i];
+      el.style.opacity = '1';
+    }, 400);
+  }, 4000);
+</script>
