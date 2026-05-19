@@ -5,6 +5,7 @@ import '@fontsource/jetbrains-mono/500.css';
 import '~/styles/global.css';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
+import AnalyticsHead from '~/components/AnalyticsHead.astro';
 import { locales, swapLocaleInPath, type Locale } from '~/i18n';
 
 interface Props {
@@ -53,6 +54,8 @@ const canonical = new URL(Astro.url.pathname, siteUrl).toString();
       hreflang="x-default"
       href={new URL(swapLocaleInPath(Astro.url.pathname, 'en'), siteUrl).toString()}
     />
+
+    <AnalyticsHead />
   </head>
   <body class="overflow-x-hidden">
     <Nav locale={locale} />
@@ -60,6 +63,14 @@ const canonical = new URL(Astro.url.pathname, siteUrl).toString();
       <slot />
     </main>
     <Footer locale={locale} />
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.__analytics) {
+          window.__analytics.pageView({ language: document.documentElement.lang });
+        }
+      });
+    </script>
 
     <script>
       const io = new IntersectionObserver(

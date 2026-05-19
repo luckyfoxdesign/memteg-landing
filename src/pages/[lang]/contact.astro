@@ -30,6 +30,9 @@ const botUrl = import.meta.env.PUBLIC_CONTACT_BOT_URL || defaultContactBotUrl;
           href={botUrl}
           target="_blank"
           rel="noopener"
+          data-analytics-event="cta_click"
+          data-cta-id="contact_open_bot"
+          data-destination="telegram"
           class="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-ink)] px-5 text-[14px] font-medium text-[var(--color-bg)] transition-all hover:-translate-y-px hover:bg-[var(--color-ink-2)]"
         >
           {page.cta.action}

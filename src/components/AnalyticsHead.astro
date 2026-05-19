@@ -1,0 +1,26 @@
+---
+const measurementId = (process.env.GA4_MEASUREMENT_ID || '').trim();
+---
+
+{measurementId && (
+  <Fragment>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'granted'
+      });
+    </script>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
+    <script is:inline define:vars={{ __ga4Id: measurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', __ga4Id, { send_page_view: false });
+    </script>
+    <script is:inline src="/js/analytics.js?v=1" data-surface="landing" data-measurement-id={measurementId}></script>
+  </Fragment>
+)}
