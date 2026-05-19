@@ -1,22 +1,6 @@
 # memteg-landing
 
-## Команды
-
-### `/start-task`
-
-Берёт задачу из `docs/backlog/todo/` в работу:
-- перемещает файл в `docs/wip/`
-- читает `PROJECT_MAP.md`, `CLAUDE.md` и файл задачи
-- предлагает план и ждёт подтверждения перед реализацией
-
-### `/complete-task`
-
-Завершает задачу по правилам `docs/folder-rules.md`. Определяет задачу из контекста разговора, спрашивает коммит и:
-
-- перемещает файл из `docs/wip/` → `docs/done/long/`
-- создаёт краткое резюме в `docs/done/short/`
-- добавляет перекрёстные ссылки между файлами
-- удаляет файл из `docs/wip/`
+Workspace skills `/start-task` и `/complete-task` — см. `../AGENTS.md`.
 
 ## Документация
 
