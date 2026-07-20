@@ -27,7 +27,6 @@ export const en = {
     cta: "Join the beta",
   },
   hero: {
-    eyebrow: "A Telegram bot for thinking people",
     title: "Your thoughts, finally captured.",
     subtitle:
       'An idea hits – you catch it. A link surfaces – you save it. No laptop, no "I\'ll write it later", no switching.',
