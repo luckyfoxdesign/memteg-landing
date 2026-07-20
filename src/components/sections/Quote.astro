@@ -10,8 +10,8 @@ const dict = t(locale);
     <p class="text-[clamp(28px,4vw,52px)] font-medium leading-[1.05] tracking-[-0.025em] text-[var(--color-ink)]">
       {dict.quote.text}
     </p>
-    <p class="mt-4 font-mono text-[12px] uppercase tracking-wider text-[var(--color-muted)]">
-      — <span id="quote-author" style="transition: opacity 0.4s ease">{dict.quote.authors[0]}</span>
+    <p class="mt-6 text-[16px] font-medium text-[var(--color-ink-2)] md:text-[18px]">
+      <span class="text-[var(--color-accent)]">–</span> <span id="quote-author" style="transition: opacity 0.4s ease">{dict.quote.authors[0]}</span>
     </p>
   </div>
 </section>
