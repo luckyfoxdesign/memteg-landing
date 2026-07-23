@@ -143,7 +143,7 @@ export const en = {
       },
       {
         q: "Do you train AI on my notes?",
-        a: "OpenAI and Anthropic have API terms that prohibit using customer data for training — but that's their policy, not our guarantee.",
+        a: "OpenAI, Anthropic, and Voyage AI have API terms that prohibit using customer data for training — but that's their policy, not our guarantee.",
       },
       {
         q: "How do I get an invite?",
@@ -210,7 +210,7 @@ export const en = {
 
   privacyPage: {
     h1: "Privacy Policy",
-    updated: "Last updated: 2026-05-18",
+    updated: "Last updated: 2026-07-23",
     intro:
       "memteg is a small startup in private beta. No legal boilerplate — just an honest explanation of how things work.",
     sections: [
@@ -224,7 +224,7 @@ export const en = {
       },
       {
         h: "What we use for AI",
-        body: "OpenAI for voice transcription and search. Anthropic for tags, summaries, and /ask. They only receive what's needed for a specific request. Both have API terms stating that customer data isn't used for model training — but that's their policy, not our guarantee.",
+        body: "OpenAI for voice transcription and search. Anthropic for tags, summaries, and /ask. Voyage AI for finding related notes. They only receive what's needed for a specific request. All of them have API terms stating that customer data isn't used for model training — but that's their policy, not our guarantee.",
       },
       {
         h: "Deletion",
